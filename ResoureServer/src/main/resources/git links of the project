@@ -1,0 +1,6 @@
+https://github.com/simplyi/ResourceServer/tree/resourceserver-after-adding-method-level-security
+
+@EnableGlobalMethodSecurity:
+Used to enable method level security . contains 2 attributes 
+1) securedEnable is true then we can use @Secured annotation
+2) prePostEnable is true then we can use @PreAuthorize and @Post Authorize 
