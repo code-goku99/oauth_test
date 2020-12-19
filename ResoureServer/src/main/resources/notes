@@ -1,0 +1,25 @@
+===============================================================================================================================
+	Eureka with multiple server instance
+===============================================================================================================================
+> server.port=0 => The Application will be running on random port number.
+when you run an instnace it will be running on random port Ex: 52001 and another instances at 52002 port
+But when we check in Eureka we can see only one instance as running  instead of 2.
+To achieve and to check in eureka to have different instances. We have to do the following
+
+For the server to run on multiple instances. we have config a property in application.property file.
+so that we have a unique instance id 
+*eureka.instance.instance-id = ${spring.application.name}:${instanceId:${random.value}}*
+or we can hard code
+  In eureka server we can see 2 instances
+  Ex: UP (2) - resource-server:3eb76911524a85d8ff2582f38bfa84e0 , resource-server:2212e4708a9426706204900826a5c705
+  
+  We can pass custom value instead of random instance id:
+  
+  1) in termainal window change to resouce server directory
+  2) Run mvn package
+  3) Now start up the new instance with the followuing command
+  	mvn spring-boot:run -Dspring.boot.run.arguments=--instanceId=sandeep
+  	
+  	Now in eureka we have Ex: resource-server:sandeep
+  	
+ =============================================================================================================================== 	 
