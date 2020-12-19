@@ -22,4 +22,22 @@ or we can hard code
   	
   	Now in eureka we have Ex: resource-server:sandeep
   	
- =============================================================================================================================== 	 
+ =============================================================================================================================== 
+ 
+ To use Api gateway project to use default spring load balancing replace the uri as below in applciation.propertiees
+Replace this as
+--------------This is Resource server routing in Api Gatway---------------------------------------------- 
+spring.cloud.gateway.routes[0].id=users-status-check
+spring.cloud.gateway.routes[0].uri=http://localhost:2000
+spring.cloud.gateway.routes[0].predicates[0]=Path=/users/status
+spring.cloud.gateway.routes[0].predicates[1]=Method=GET
+spring.cloud.gateway.routes[0].filters[0]=RemoveRequestHeader=Cookie	 
+-----------------------------------------------------------------
+spring.cloud.gateway.routes[0].id=users-status-check
+spring.cloud.gateway.routes[0].uri=lb://<name of the application> => lb://resource-server
+spring.cloud.gateway.routes[0].predicates[0]=Path=/users/status
+spring.cloud.gateway.routes[0].predicates[1]=Method=GET
+spring.cloud.gateway.routes[0].filters[0]=RemoveRequestHeader=Cookie
+--------------------------------------------------------------
+lb://resource-server this details is taken by Eureka Discovery Serivce project
+Fetch form eureka all services > take the port and ip 
