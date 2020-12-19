@@ -1,4 +1,4 @@
-package com.photos.model;
+package com.resource.server.photos.model;
 
 public class PhotosResponse {
 
