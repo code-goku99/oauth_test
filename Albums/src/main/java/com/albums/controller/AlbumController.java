@@ -18,9 +18,11 @@ public class AlbumController {
 	public List<Album> displayAlbums(Model model) {
 		
 		Album album1 = new Album();
+		album1.setAlbumTitle("1st Album");
 		Album album2 = new Album();
 		Album album3 = new Album();
 		Album album4 = new Album();
+		album4.setAlbumTitle("4th Album");
 		Album album5 = new Album();
 		Album album6 = new Album();
 		model.addAttribute("albumList",  Arrays.asList(album1,album2,album3,album4,album5,album6));

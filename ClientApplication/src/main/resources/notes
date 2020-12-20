@@ -1,0 +1,45 @@
+For Cleint mvc application we need to configure the clientid seceret authorization code and redirect uri
+so these configuration are used to contact the authorization server
+
+spring.security.oauth2.client.registration.web-app-client.client-id = album-web-app
+spring.security.oauth2.client.registration.web-app-client.client-secret = 43f1bac9-d979-4f60-b35d-5a4307a2a5b2
+spring.security.oauth2.client.registration.web-app-client.scope = openid, profile, roles
+spring.security.oauth2.client.registration.web-app-client.authorization-grant-type = authorization_code
+spring.security.oauth2.client.registration.web-app-client.redirect-uri = http://localhost:2009/login/oauth2/code/web-app-client
+
+
+>>{spring.security.oauth2.client.registration}.{web-app-client}.client-id = <client id> created in keyklock Auth server
+		spring specfic                           registration id
+
+>> client-secret = <we get secert value when we register with the Auth server>
+>> scope = scopes we mention in keyclock
+>> authorization-grant-type = authorization_code(mentioned in keyclock. when Direct Access Grants Enabled is OFF in keycloak.If it ON means it is password grant
+so we can pass authorization-grant-type = password.
+
+For Authrization code we have get the code from Auth server 
+For Example: When we make authentication with rest apis.Here the Auth server is running 8180 port,oauthapp is client id  
+http://localhost:8180/auth/realms/oauthapp/protocol/openid-connect/auth?client_id=oauthapp&response_type=code&scope=openid profile&redirect_uri=http://localhost:2020/callback&state=wehh5667jjbf
+this will redirect to the url specifed and gives the code to us.
+
+Based on the code provided we need to hit an api (which is post)given by auth server by providing the code.
+POST >> http://localhost:8180/auth/realms/oauthapp/protocol/openid-connect/token
+BODY :
+In postman by checking form-urlencoding and passing : client_id,client_secret,code,redirect_uri,scope,grant_type as authorization_code
+
+This process is said to be Authorization Code Grant.
+) 		
+
+For authorization-grant-type = password. we no need to pass the code. we need to pass the username and password for the api
+POST >> http://localhost:8180/auth/realms/oauthapp/protocol/openid-connect/token
+BODY :
+In postman by checking form-urlencoding and passing : client_id,client_secret,code,redirect_uri,scope,grant_type as password, username,password
+
+So in spring mvc:
+we need to do the same instead of postman. we configure few more properties
+=============Communicate with Auth Server====================================
+spring.security.oauth2.client.provider.web-app-client.authorization-uri = http://localhost:8180/auth/realms/web-app-client/protocol/openid-connect/auth
+spring.security.oauth2.client.provider.web-app-client.token-uri = http://localhost:8100/auth/realms/web-app-client/protocol/openid-connect/token
+spring.security.oauth2.client.provider.web-app-client.jwk-set-uri=http://localhost:8100/auth/realms/web-app-client/protocol/openid-connect/certs
+spring.security.oauth2.client.provider.web-app-client.user-info-uri = http://localhost:8100/auth/realms/web-app-client/protocol/openid-connect/userinfo
+spring.security.oauth2.client.provider.web-app-client.user-name-attribute = preferred_username
+
