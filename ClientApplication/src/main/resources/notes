@@ -1,11 +1,11 @@
 For Cleint mvc application we need to configure the clientid seceret authorization code and redirect uri
 so these configuration are used to contact the authorization server
 
-spring.security.oauth2.client.registration.web-app-client.client-id = album-web-app
+spring.security.oauth2.client.registration.web-app-client.client-id = aoauthapp
 spring.security.oauth2.client.registration.web-app-client.client-secret = 43f1bac9-d979-4f60-b35d-5a4307a2a5b2
-spring.security.oauth2.client.registration.web-app-client.scope = openid, profile, roles
+spring.security.oauth2.client.registration.web-app-client.scope = openid, profile
 spring.security.oauth2.client.registration.web-app-client.authorization-grant-type = authorization_code
-spring.security.oauth2.client.registration.web-app-client.redirect-uri = http://localhost:2009/login/oauth2/code/web-app-client
+spring.security.oauth2.client.registration.web-app-client.redirect-uri = http://localhost:2009/login/oauth2/code/oauthapp
 
 
 >>{spring.security.oauth2.client.registration}.{web-app-client}.client-id = <client id> created in keyklock Auth server
@@ -37,9 +37,9 @@ In postman by checking form-urlencoding and passing : client_id,client_secret,co
 So in spring mvc:
 we need to do the same instead of postman. we configure few more properties
 =============Communicate with Auth Server====================================
-spring.security.oauth2.client.provider.web-app-client.authorization-uri = http://localhost:8180/auth/realms/web-app-client/protocol/openid-connect/auth
-spring.security.oauth2.client.provider.web-app-client.token-uri = http://localhost:8100/auth/realms/web-app-client/protocol/openid-connect/token
-spring.security.oauth2.client.provider.web-app-client.jwk-set-uri=http://localhost:8100/auth/realms/web-app-client/protocol/openid-connect/certs
-spring.security.oauth2.client.provider.web-app-client.user-info-uri = http://localhost:8100/auth/realms/web-app-client/protocol/openid-connect/userinfo
+spring.security.oauth2.client.provider.web-app-client.authorization-uri = http://localhost:8180/auth/realms/oauthapp/protocol/openid-connect/auth
+spring.security.oauth2.client.provider.web-app-client.token-uri = http://localhost:8180/auth/realms/oauthapp/protocol/openid-connect/token
+spring.security.oauth2.client.provider.web-app-client.jwk-set-uri=http://localhost:8180/auth/realms/oauthapp/protocol/openid-connect/certs
+spring.security.oauth2.client.provider.web-app-client.user-info-uri = http://localhost:8180/auth/realms/oauthapp/protocol/openid-connect/userinfo
 spring.security.oauth2.client.provider.web-app-client.user-name-attribute = preferred_username
 
