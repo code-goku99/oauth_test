@@ -43,3 +43,4 @@ spring.security.oauth2.client.provider.web-app-client.jwk-set-uri=http://localho
 spring.security.oauth2.client.provider.web-app-client.user-info-uri = http://localhost:8180/auth/realms/oauthapp/protocol/openid-connect/userinfo
 spring.security.oauth2.client.provider.web-app-client.user-name-attribute = preferred_username
 
+https://github.com/simplyi/PhotoAppWebClient/blob/rest-template-example/src/main/resources/application.properties
