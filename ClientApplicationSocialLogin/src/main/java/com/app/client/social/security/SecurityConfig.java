@@ -16,7 +16,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.anyRequest()
 		.authenticated()
 		.and()
-		.oauth2Login();
+		.oauth2Login()
+		.and()
+		.logout()
+		.logoutSuccessUrl("/")
+		.invalidateHttpSession(true)
+		.clearAuthentication(true)
+		.deleteCookies("JSESSIONID");
 	}
 	
 }

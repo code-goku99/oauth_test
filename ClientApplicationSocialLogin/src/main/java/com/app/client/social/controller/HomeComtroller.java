@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeComtroller {
 
-	@GetMapping
+	@GetMapping("/home")
 	public String displayHomePage(Model model, @AuthenticationPrincipal OAuth2User user) {
 		if(user != null) {
 			model.addAttribute("name",user.getAttribute("name"));
